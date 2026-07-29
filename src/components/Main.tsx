@@ -4,6 +4,11 @@ import { useEffect, useState } from "react"
 
 function Main() {
   const [countries, setCountries] = useState<Country[]>([])
+  const [query, setQuery] = useState("")
+
+  const filteredCountries = countries.filter((country) => {
+    return country.name.toLowerCase().includes(query.toLowerCase())
+  })
 
   async function getCountries(): Promise<Country[] | []> {
     try {
@@ -28,13 +33,60 @@ function Main() {
   }, [])
 
   return (
-    <div>
-      <ul>
-        {countries.map((country, index) => {
-          return <li key={index}>{country.name}</li>
+    <main className="bg-[hsl(0,0%,99%)] px-16 py-10">
+      <div className="relative mb-10 max-w-md">
+        <svg
+          className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-gray-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+        <input
+          type="text"
+          placeholder="Search for a country..."
+          className="w-full rounded-lg border border-gray-200 bg-white py-3 pl-11 pr-4 text-sm shadow-md outline-none transition-shadow focus:shadow-lg focus:ring-2 focus:ring-blue-400"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </div>
+      <ul className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {(query ? filteredCountries : countries).map((country, index) => {
+          return (
+            <li key={index}>
+              <article className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-shadow hover:shadow-lg">
+                <img
+                  src={country.flags.png}
+                  alt={`${country.name} flag`}
+                  className="h-40 w-full object-cover"
+                />
+                <div className="space-y-3 p-6">
+                  <h2 className="text-lg font-extrabold">{country.name}</h2>
+                  <div className="flex gap-1 text-sm">
+                    <h4 className="font-semibold">Population:</h4>
+                    <p>{country.population}</p>
+                  </div>
+                  <div className="flex gap-1 text-sm">
+                    <h4 className="font-semibold">Region:</h4>
+                    <p>{country.region}</p>
+                  </div>
+                  <div className="flex gap-1 text-sm">
+                    <h4 className="font-semibold">Capital:</h4>
+                    <p>{country.capital}</p>
+                  </div>
+                </div>
+              </article>
+            </li>
+          )
         })}
       </ul>
-    </div>
+    </main>
   )
 }
 
