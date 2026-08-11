@@ -3,12 +3,12 @@ import { type Country } from "../types/country"
 
 interface CountryListProps {
   countries: Country[]
-  onDataSubmit: (data: boolean) => void
+  onDataSubmit: (data: Country) => void
 }
 
 function CountryList({ countries, onDataSubmit }: CountryListProps) {
-  const sendDataToParent = () => {
-    onDataSubmit(true)
+  const sendDataToParent = (country: Country): void => {
+    onDataSubmit(country)
   }
 
   const [query, setQuery] = useState("")
@@ -121,7 +121,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
         {(query || regionName ? filteredCountries : countries).map(
           (country, index) => {
             return (
-              <li key={index} onClick={sendDataToParent}>
+              <li key={index} onClick={() => sendDataToParent(country)}>
                 <article className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-shadow hover:shadow-lg">
                   <img
                     src={country.flags.png}

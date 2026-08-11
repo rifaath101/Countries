@@ -6,11 +6,26 @@ import CountryInfo from "./CountryInfo"
 
 function Main() {
   const [countries, setCountries] = useState<Country[]>([])
-  const [countrySelected, setCountrySelected] = useState(false)
+  const [countrySelected, setCountrySelected] = useState<Country>()
 
-  const handleChildData = (data: boolean) => {
+  const handleChildData = (data: Country) => {
     setCountrySelected(data)
   }
+
+  function getBorderCountries(): Country[] | undefined {
+    if (!countrySelected?.borders) {
+      return
+    }
+
+    const countryBorders = countrySelected?.borders
+    const matchingBorderCountries = countries.filter((country) =>
+      countryBorders.includes(country.alpha3Code),
+    )
+
+    return matchingBorderCountries
+  }
+
+  const borderCountries = getBorderCountries()
 
   async function getCountries(): Promise<Country[] | []> {
     try {
@@ -35,7 +50,7 @@ function Main() {
   }, [])
 
   return countrySelected ? (
-    <CountryInfo />
+    <CountryInfo country={countrySelected} borderCountries={borderCountries} />
   ) : (
     <CountryList countries={countries} onDataSubmit={handleChildData} />
   )
