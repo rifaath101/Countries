@@ -56,7 +56,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
   const regions = getRegions()
 
   return (
-    <main className="bg-[hsl(0,0%,99%)] px-4 py-6 sm:px-8 sm:py-8 lg:px-16 lg:py-10">
+    <main className="bg-[hsl(0,0%,99%)] dark:bg-gray-900 px-4 py-6 sm:px-8 sm:py-8 lg:px-16 lg:py-10 text-gray-900 dark:text-white">
       <div className="mb-10 flex flex-col gap-6 sm:mb-14 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full sm:max-w-md">
           <svg
@@ -75,7 +75,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
           <input
             type="text"
             placeholder="Search for a country..."
-            className="w-full rounded-lg border border-gray-200 bg-white py-3 pl-11 pr-4 text-sm shadow-md outline-none transition-shadow focus:shadow-lg focus:ring-2 focus:ring-blue-400"
+            className="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 pl-11 pr-4 text-sm shadow-md outline-none transition-shadow focus:shadow-lg focus:ring-2 focus:ring-blue-400"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -83,7 +83,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
         <div className="relative w-full sm:w-56">
           <button
             type="button"
-            className={`flex w-full items-center justify-between border border-gray-200 bg-white px-4 py-3 shadow-md ${regionFilterClicked ? "rounded-t-lg" : "rounded-lg"}`}
+            className={`flex w-full items-center justify-between border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 shadow-md ${regionFilterClicked ? "rounded-t-lg" : "rounded-lg"}`}
             onClick={() => setRegionFilterClicked(!regionFilterClicked)}
           >
             <span>{regionName ? regionName : `Filter by Region`}</span>
@@ -102,13 +102,13 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
             </svg>
           </button>
           {regionFilterClicked && (
-            <ul className="absolute z-10 -mt-px w-full overflow-hidden rounded-b-lg border border-t-0 border-gray-200 bg-white shadow-md">
+            <ul className="absolute z-10 -mt-px w-full overflow-hidden rounded-b-lg border border-t-0 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md">
               {regions.map((region) => (
                 <input
                   key={region}
                   type="button"
                   value={region}
-                  className="block w-full cursor-pointer px-4 py-2 text-left hover:bg-gray-100"
+                  className="block w-full cursor-pointer px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
                   onClick={handleRegionClick}
                 />
               ))}
@@ -122,7 +122,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
           (country, index) => {
             return (
               <li key={index} onClick={() => sendDataToParent(country)}>
-                <article className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-shadow hover:shadow-lg">
+                <article className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md transition-shadow hover:shadow-lg">
                   <img
                     src={country.flags.png}
                     alt={`${country.name} flag`}
@@ -132,7 +132,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
                     <h2 className="text-lg font-extrabold">{country.name}</h2>
                     <div className="flex gap-1 text-sm">
                       <h4 className="font-semibold">Population:</h4>
-                      <p>{country.population}</p>
+                      <p>{country.population.toLocaleString()}</p>
                     </div>
                     <div className="flex gap-1 text-sm">
                       <h4 className="font-semibold">Region:</h4>

@@ -46,10 +46,10 @@ function CountryInfo({
   }
 
   return (
-    <div className="px-4 py-6 sm:px-8 sm:py-8 lg:px-16 lg:py-10">
+    <div className="bg-[hsl(0,0%,99%)] dark:bg-gray-900 min-h-screen px-4 py-6 sm:px-8 sm:py-8 lg:px-16 lg:py-10 text-gray-900 dark:text-white">
       <button
         type="button"
-        className="flex items-center gap-2 rounded-md border border-gray-200 bg-white px-6 py-2 text-sm shadow-sm hover:bg-gray-100"
+        className="flex items-center gap-2 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-6 py-2 text-sm shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700"
         onClick={() => sendDataToParent(undefined)}
       >
         <span aria-hidden="true">&larr;</span>
@@ -112,7 +112,7 @@ function CountryInfo({
                 <button
                   onClick={() => handleChangeCountry(border)}
                   key={border.alpha3Code}
-                  className="rounded border border-gray-200 bg-white px-4 py-1 text-sm shadow-sm"
+                  className="rounded border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-1 text-sm shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   {border.name}
                 </button>
