@@ -56,9 +56,9 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
   const regions = getRegions()
 
   return (
-    <main className="bg-[hsl(0,0%,99%)] px-16 py-10">
-      <div className="flex justify-between">
-        <div className="relative mb-10 max-w-md">
+    <main className="bg-[hsl(0,0%,99%)] px-4 py-6 sm:px-8 sm:py-8 lg:px-16 lg:py-10">
+      <div className="mb-10 flex flex-col gap-6 sm:mb-14 sm:flex-row sm:items-center sm:justify-between">
+        <div className="relative w-full sm:max-w-md">
           <svg
             className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-gray-400"
             fill="none"
@@ -80,7 +80,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
-        <div className="relative w-56">
+        <div className="relative w-full sm:w-56">
           <button
             type="button"
             className={`flex w-full items-center justify-between border border-gray-200 bg-white px-4 py-3 shadow-md ${regionFilterClicked ? "rounded-t-lg" : "rounded-lg"}`}
@@ -117,7 +117,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
         </div>
       </div>
 
-      <ul className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 xl:grid-cols-4">
         {(query || regionName ? filteredCountries : countries).map(
           (country, index) => {
             return (
