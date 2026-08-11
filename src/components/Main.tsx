@@ -8,7 +8,7 @@ function Main() {
   const [countries, setCountries] = useState<Country[]>([])
   const [countrySelected, setCountrySelected] = useState<Country>()
 
-  const handleChildData = (data: Country) => {
+  const handleChildData = (data: Country | undefined) => {
     setCountrySelected(data)
   }
 
@@ -50,7 +50,11 @@ function Main() {
   }, [])
 
   return countrySelected ? (
-    <CountryInfo country={countrySelected} borderCountries={borderCountries} />
+    <CountryInfo
+      country={countrySelected}
+      borderCountries={borderCountries}
+      onDataSubmit={handleChildData}
+    />
   ) : (
     <CountryList countries={countries} onDataSubmit={handleChildData} />
   )

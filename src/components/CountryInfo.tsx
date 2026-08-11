@@ -3,10 +3,18 @@ import { type Country } from "../types/country"
 interface CountryInfoProps {
   country: Country
   borderCountries: Country[] | undefined
+  onDataSubmit: (data: undefined) => void
 }
 
-function CountryInfo({ country, borderCountries }: CountryInfoProps) {
-  console.log(borderCountries, " hh")
+function CountryInfo({
+  country,
+  borderCountries,
+  onDataSubmit,
+}: CountryInfoProps) {
+  const sendDataToParent = (country: undefined): void => {
+    onDataSubmit(country)
+  }
+
   const extractCurrencies = (): string => {
     const currencies: string[] | undefined = country.currencies?.map(
       (currency) => currency.name,
@@ -35,6 +43,7 @@ function CountryInfo({ country, borderCountries }: CountryInfoProps) {
       <button
         type="button"
         className="flex items-center gap-2 rounded-md border border-gray-200 bg-white px-6 py-2 text-sm shadow-sm hover:bg-gray-100"
+        onClick={() => sendDataToParent(undefined)}
       >
         <span aria-hidden="true">&larr;</span>
         Back
@@ -60,8 +69,7 @@ function CountryInfo({ country, borderCountries }: CountryInfoProps) {
                 {country.population.toLocaleString()}
               </p>
               <p>
-                <span className="font-semibold">Region:</span>{" "}
-                {country.region}
+                <span className="font-semibold">Region:</span> {country.region}
               </p>
               <p>
                 <span className="font-semibold">Sub Region:</span>{" "}
