@@ -56,7 +56,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
   const regions = getRegions()
 
   return (
-    <main className="bg-[hsl(0,0%,99%)] dark:bg-gray-900 px-4 py-6 sm:px-8 sm:py-8 lg:px-16 lg:py-10 text-gray-900 dark:text-white">
+    <main className="min-h-screen bg-[hsl(0,0%,99%)] dark:bg-gray-900 px-4 py-6 sm:px-8 sm:py-8 lg:px-16 lg:py-10 text-gray-900 dark:text-white">
       <div className="mb-10 flex flex-col gap-6 sm:mb-14 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full sm:max-w-md">
           <svg
@@ -83,7 +83,7 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
         <div className="relative w-full sm:w-56">
           <button
             type="button"
-            className={`flex w-full items-center justify-between border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 shadow-md ${regionFilterClicked ? "rounded-t-lg" : "rounded-lg"}`}
+            className={`flex w-full cursor-pointer items-center justify-between border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 shadow-md ${regionFilterClicked ? "rounded-t-lg" : "rounded-lg"}`}
             onClick={() => setRegionFilterClicked(!regionFilterClicked)}
           >
             <span>{regionName ? regionName : `Filter by Region`}</span>
@@ -118,10 +118,19 @@ function CountryList({ countries, onDataSubmit }: CountryListProps) {
       </div>
 
       <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 xl:grid-cols-4">
+        {filteredCountries.length < 1 ? (
+          <h2>Sorry, we can't find what you're looking for</h2>
+        ) : (
+          ""
+        )}
         {(query || regionName ? filteredCountries : countries).map(
           (country, index) => {
             return (
-              <li key={index} onClick={() => sendDataToParent(country)}>
+              <li
+                key={index}
+                className="cursor-pointer"
+                onClick={() => sendDataToParent(country)}
+              >
                 <article className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md transition-shadow hover:shadow-lg">
                   <img
                     src={country.flags.png}

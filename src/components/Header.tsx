@@ -14,7 +14,7 @@ function Header() {
       </h1>
       <button
         type="button"
-        className="flex items-center gap-2 text-sm sm:text-base"
+        className="flex cursor-pointer items-center gap-2 text-sm sm:text-base"
         onClick={() => setLightMode(!lightMode)}
       >
         {lightMode ? (
