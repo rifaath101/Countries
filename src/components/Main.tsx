@@ -55,8 +55,15 @@ function Main() {
       borderCountries={borderCountries}
       onDataSubmit={handleChildData}
     />
-  ) : (
+  ) : countries.length > 1 ? (
     <CountryList countries={countries} onDataSubmit={handleChildData} />
+  ) : (
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[hsl(0,0%,99%)] text-gray-900 dark:bg-gray-900 dark:text-white">
+      <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-blue-500 dark:border-gray-700 dark:border-t-blue-400" />
+      <p className="animate-pulse text-sm font-semibold">
+        Loading countries...
+      </p>
+    </div>
   )
 }
 
